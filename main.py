@@ -8,6 +8,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.image import Image
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
+from kivy.uix.popup import Popup
+import webbrowser
 from bands import bands
 
 class Myapp(App):
@@ -22,6 +24,11 @@ class Myapp(App):
         self.colors = {'Red': 'R', 'Green': 'G', 'Blue': 'B', 'White': 'W', 'Yellow': 'Y', 'Orange': 'O', 'Sky Blue': 'S', 'Light Green': 'H', 'Brown': 'C'}
 
         main_layout = BoxLayout(orientation="vertical")
+
+        self.target = ''
+        self.bandedbfs = Button(text ="", size_hint=(1, 1), size=(200, 200))
+        self.bandedbfs.bind(on_press=self.linkto)
+        self.popupimg = Popup(title='', content=self.bandedbfs, size_hint=(0.9, None), size=(400, 400))
 
         # Header
         header = BoxLayout(size_hint=(1, .5))
@@ -260,11 +267,29 @@ class Myapp(App):
     def bfs(self, bandno):
         self.body.clear_widgets()
         #self.body.size_hint=(1, len(bandno)/6)
-        images = GridLayout(cols=2, row_default_height=200, size_hint=(1, None), size=(200, 300*len(bandno)/2))
+        images = GridLayout(cols=2, row_default_height=200, size_hint=(1, None), size=(200, 200*len(bandno)/2))
         for i in range(len(bandno)):
-            img =  Image(source='images/%s.png' %bandno[i])
+            band = bandno[i]
+            #img =  Image(source='images/%s.png' %band)
+            img = Button(text ="",
+                     background_normal = 'images/%s.png' %band,
+                     background_down ='images/%s.png' %band,
+                     size=(200, 200)
+                   )
+            img.bind(on_press=self.popup)
             images.add_widget(img)
         self.body.add_widget(images)
+
+    def popup(self, instance):
+        self.target = instance.background_normal.replace('images/', '').replace('.png', '')
+        self.bandedbfs.background_normal = instance.background_normal
+        self.bandedbfs.background_down = instance.background_down
+        #self.popupimg.content = Image(source= instance.background_normal)
+        self.popupimg.title = self.target + ': ' + bands[self.target][1] + '@' + bands[self.target][2]
+        self.popupimg.open()
+
+    def linkto(self, instance):
+        webbrowser.open('https://bfsn.bfsa.org.tw/bandbfs.php?markedbfs=%s'%self.target)
 
 if __name__ == '__main__':
     Myapp().run()
