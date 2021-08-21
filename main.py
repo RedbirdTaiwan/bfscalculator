@@ -260,7 +260,7 @@ class Myapp(App):
     def bfs(self, bandno):
         self.body.clear_widgets()
         #self.body.size_hint=(1, len(bandno)/6)
-        images = GridLayout(cols=2, row_default_height=200, size_hint=(1, None), size=(200, 200*len(bandno)/2))
+        images = GridLayout(cols=2, row_default_height=200, size_hint=(1, None), size=(200, 300*len(bandno)/2))
         for i in range(len(bandno)):
             img =  Image(source='images/%s.png' %bandno[i])
             images.add_widget(img)
