@@ -2,3 +2,5 @@ v_kivy/
 __pycache__
 *.spec
 *.apk
+*.keystore
+.gitignore
