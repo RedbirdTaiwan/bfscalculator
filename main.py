@@ -26,15 +26,15 @@ class Myapp(App):
         main_layout = BoxLayout(orientation="vertical")
 
         self.target = ''
-        self.bandedbfs = Button(text ="", size_hint=(1, None), size=(Window.width*0.95, Window.width*0.95))
+        self.bandedbfs = Button(text ="", size_hint=(1, None), size=(Window.width*0.85, Window.width*0.85))
         self.bandedbfs.bind(on_press=self.linkto)
-        self.popupimg = Popup(title='', content=self.bandedbfs, size_hint=(0.9, None), size=(400, 400))
+        self.popupimg = Popup(title='', content=self.bandedbfs, size_hint=(0.9, None), size=(Window.width*0.9, Window.width))
 
         # Header
         header = BoxLayout(size_hint=(1, .5))
         header.add_widget(Image(source='images/bfsa_log.png', size_hint=(.2, 1)))
-        header.add_widget(Label(text='BFSA', size_hint=(.2, 1)))
-        self.query = TextInput(multiline=False, readonly=True, font_size=header.height/4, halign="right", size_hint=(.6, 1))
+        header.add_widget(Label(text='BFSA', font_size=header.height/3, size_hint=(.2, 1)))
+        self.query = TextInput(multiline=False, readonly=True, font_size=header.height/3, halign="right", size_hint=(.6, 1))
         header.add_widget(self.query)
         main_layout.add_widget(header)
 
@@ -267,7 +267,7 @@ class Myapp(App):
     def bfs(self, bandno):
         self.body.clear_widgets()
         #self.body.size_hint=(1, len(bandno)/6)
-        images = GridLayout(cols=2, row_default_height=Window.width/2, size_hint=(1, None), size=(200, 200*len(bandno)/2))
+        images = GridLayout(cols=2, row_default_height=Window.width/2, size_hint=(1, None), size=(Window.width, Window.width/2*len(bandno)/2))
         for i in range(len(bandno)):
             band = bandno[i]
             #img =  Image(source='images/%s.png' %band)
