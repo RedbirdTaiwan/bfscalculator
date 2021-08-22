@@ -26,7 +26,7 @@ class Myapp(App):
         main_layout = BoxLayout(orientation="vertical")
 
         self.target = ''
-        self.bandedbfs = Button(text ="", size_hint=(1, 1), size=(200, 200))
+        self.bandedbfs = Button(text ="", size_hint=(1, None), size=(Window.width*0.95, Window.width*0.95))
         self.bandedbfs.bind(on_press=self.linkto)
         self.popupimg = Popup(title='', content=self.bandedbfs, size_hint=(0.9, None), size=(400, 400))
 
@@ -267,7 +267,7 @@ class Myapp(App):
     def bfs(self, bandno):
         self.body.clear_widgets()
         #self.body.size_hint=(1, len(bandno)/6)
-        images = GridLayout(cols=2, row_default_height=200, size_hint=(1, None), size=(200, 200*len(bandno)/2))
+        images = GridLayout(cols=2, row_default_height=Window.width/2, size_hint=(1, None), size=(200, 200*len(bandno)/2))
         for i in range(len(bandno)):
             band = bandno[i]
             #img =  Image(source='images/%s.png' %band)
