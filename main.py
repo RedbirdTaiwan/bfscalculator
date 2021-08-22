@@ -33,7 +33,7 @@ class Myapp(App):
         # Header
         header = BoxLayout(size_hint=(1, .5))
         header.add_widget(Image(source='images/bfsa_log.png', size_hint=(.2, 1)))
-        header.add_widget(Label(text='BFSA', font_size=header.height/3, size_hint=(.2, 1)))
+        header.add_widget(Label(text='BFSA', size_hint=(.2, 1)))
         self.query = TextInput(multiline=False, readonly=True, font_size=header.height/3, halign="right", size_hint=(.6, 1))
         header.add_widget(self.query)
         main_layout.add_widget(header)
@@ -274,7 +274,8 @@ class Myapp(App):
             img = Button(text ="",
                      background_normal = 'images/%s.png' %band,
                      background_down ='images/%s.png' %band,
-                     size=(200, 200)
+                     size=(Window.width/2, Window.width/2),
+                     size_hint=(None, None)
                    )
             img.bind(on_press=self.popup)
             images.add_widget(img)
